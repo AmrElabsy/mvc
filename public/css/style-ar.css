@@ -1,0 +1,51 @@
+.stats .stat .icon {
+    margin-left: 20px;
+}
+
+.stats .stat .num {
+    margin-right: 25px;
+}
+
+.sign-in input {
+    padding-right:70px
+}
+
+.sign-in div .input-icon {
+    right: 40px
+}
+
+.clinic-info .edit-button {
+    right: 20px;
+}
+
+.modal-content .content .profile-info
+{
+    border-left: 1px solid #6D6A6A;
+}
+
+.admin-dashboard-body .appointments_dash ._appointments span,
+.admin-dashboard-body .appointments_dash .finished_appointments span,
+.admin-dashboard-body .appointments_dash .remaining_appointments span,
+.admin-dashboard-body .appointments_dash .cancelled_appointments span,
+.doctor-dashboard-body .patients-waiting-attend .patient_no span,
+.doctor-dashboard-body .patients-waiting-attend .patient_waiting span,
+.doctor-dashboard-body .patients-waiting-attend .patient_attend span,
+.profile-body .profile-body-info .edit-profile,
+.profile-body .profile-body-info .add-contacts,
+.profile-body .profile-body-info .add-diagnosis
+
+{
+    float: left;
+}
+
+.patients-waiting-attend span {
+    margin-left: 35px !important;
+}
+
+.Accept-doctor .btn{float: left}
+.doctors-table .btn-primary{padding:0.375rem 29.35px}
+
+
+.footer .content {
+    margin-right: 30px;
+}

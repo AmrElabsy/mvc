@@ -1,0 +1,76 @@
+@media print
+{
+    body
+    {
+        margin: 15px
+    }
+    #printDiv
+    {
+        display: block;
+        border: 1px solid #000;
+        margin: 15px;
+        padding: 20px
+    }
+    #printDiv h1
+    {
+        text-align: center;
+    }
+    #printDiv h1 span
+    {
+        border: 2px solid #000;
+        border-radius: 50%;
+        padding: 5px 20px;
+        font-size: 25px
+    }
+    #printDiv label, .printDiv span
+    {
+        font-weight: bold;
+        font-family: 'Arial';
+    }
+    #printDiv label
+    {
+        font-size: 18px;
+        margin: 12px 5px
+    }
+    #printDiv span
+    {
+        font-size: 15px;
+    }
+    @page { size: auto;  margin: 0mm; }
+    .printPrescription .nav
+    {
+        border-bottom: 1px solid #000;
+        padding-left: 10px
+    }
+    .printPrescription label, .prescriptionBody ol li
+    {
+        font-size: 25px;
+        font-family: 'Arial';
+        font-weight: bold;
+    }
+    .printPrescription .docName
+    {
+        margin-left: 30%
+    }
+    .printPrescription label span
+    {
+        font-size: 20px;
+        font-family: 'Arial';
+        font-weight: bold;
+    }
+    .prescriptionBody 
+    {
+        margin: 30px;
+    }
+    .prescriptionBody ol
+    {
+        margin-top: 10px;
+        padding: 20px;
+        border: 1px solid #000
+    }
+    .prescriptionBody ol li
+    {
+        margin: 15px;
+    }
+    
+}
