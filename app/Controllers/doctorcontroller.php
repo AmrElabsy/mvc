@@ -65,7 +65,7 @@ class doctor extends abstractcontroller
 
     public function manage()
     {
-        if (isAdmin()) {
+        if (true) {
             global $param;
             global $page;
             global $title;
@@ -85,7 +85,7 @@ class doctor extends abstractcontroller
                 } else {
                     $doctor->activate();
                 }
-                redirect('back');
+                redirect();
             }
             $this->view();
         } else {

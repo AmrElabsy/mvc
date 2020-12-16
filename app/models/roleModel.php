@@ -4,9 +4,9 @@
     {
         protected static $tableName = 'roles';
 
-        private $id;
+        protected $id;
         private $role;
-        private $permssions;
+        private $permissions;
 
         public function __construct($id)
         {
@@ -29,18 +29,21 @@
             $stmt = $con->prepare("SELECT permissions.id, permissions.permission FROM role_permission INNER JOIN permissions ON role_permission.permission_id = permissions.id WHERE role_id = ?");
             $stmt->execute([$this->id]);
 
-            $permssions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $permissions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $this->permissions = $permssions;
+            foreach ($permissions as $permission) {
+                $per = new permissionModel($permission['id']);
+                $this->permissions[] = $per;
+            };
         }
 
         public function getPermissions() {
             return $this->permissions;
         }
 
-        public function hasPermission($permssion) {
-            foreach ($this->permissions as $RolePermssion) {
-                if ( $permssion == $RolePermssion['permission'] ) {
+        public function hasPermission($permission) {
+            foreach ($this->permissions as $RolePermission) {
+                if ( $permission == $RolePermission->getPermission() ) {
                     return true;
                 }
             }

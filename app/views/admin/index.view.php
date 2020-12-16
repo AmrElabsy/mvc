@@ -94,7 +94,7 @@ $recentvisits = $this->data['recentVisits'];
                     $i = 0;
                     foreach ($absentDoctors as $doctor) : ?>
                         <div class="row">
-                            <div class="absent-doctor-img col-5"><img src="public/images/doctors/doctor.png"></div>
+                            <div class="absent-doctor-img col-5"><img src="mvc/public/images/doctors/doctor.png"></div>
                             <div class="absent-doctor-name col-7">
                                 <h5><?php echo $doctor['doctor']?></h5>
                                 <h6><?php echo $doctor['clinic']?></h6>
@@ -122,7 +122,7 @@ $recentvisits = $this->data['recentVisits'];
 
                         ?>
                         <div class="row">
-                            <div class="present-doctor-img col-5"><img src="public/images/doctors/doctor.png"></div>
+                            <div class="present-doctor-img col-5"><img src="mvc/public/images/doctors/doctor.png"></div>
                             <div class="present-doctor-name col-7">
                                 <h5><?php echo $row['doctor'];?></h5>
                                 <h6><?php echo $row['clinic'];?><h6>

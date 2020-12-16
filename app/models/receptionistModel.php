@@ -4,7 +4,7 @@
     {
         protected static $tableName = 'receptionists';
 
-        private $id;
+        protected $id;
         public $name;
         public $image;
 

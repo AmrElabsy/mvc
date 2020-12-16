@@ -15,6 +15,7 @@ class home extends AbstractController
         $user = new userModel(1);
         $roles = $user->getRoles();
         var_dump( $user->hasPermission("edit post") );
+        var_dump( Session::User() );
         $this->data['doctors'] = doctorModel::getDoctorsByLimit(6);
         $this->data['clinics'] = clinicModel::getClinicsByLimit(6);
         $this->data['countOfClinics'] = clinicModel::getCount();
@@ -233,35 +234,31 @@ class home extends AbstractController
                     $id = doctorModel::isValidSignIn($name, $pass);
                     $doctor = new doctorModel($id);
                     if ($doctor->isActivated) {
-                        $_SESSION['doc_id'] = $id;
+                        $_SESSION['id'] = $id;
                         //$this->setMsg($id);
                         $_SESSION['auth'][] = 'doctor';
                         if ($doctor->access == 1) {
                             $_SESSION['auth'][] = 'admin';
-                            $_SESSION['admin_id'] = $id;
+                            $_SESSION['id'] = $id;
                         }
-                        header('location: /home');
-                        exit();
+                        redirect('home/signin');
                     } else {
                         $this->setMsg(getLang("لم يتم تفعيل هذا الحساب بعد", "This Account is not Activated."));
-                        header('location: /home/signin');
-                        exit();
+                        redirect('home/signin');
                     }
                 } elseif (patientModel::isValidSignIn($name, $pass) > 0) {
                     $id = patientModel::isValidSignIn($name, $pass);
                     $_SESSION['pat_id'] = $id;
                     $_SESSION['auth'][] = 'patient';
-                    header('location: /home');
-                    exit();
+                    redirect('home/signin');
                 } elseif (receptionistModel::isValidSignIn($name, $pass) > 0) {
                     $id = receptionistModel::isValidSignIn($name, $pass);
                     $_SESSION['rec_id'] = $id;
                     $_SESSION['auth'][] = 'receptionist';
-                    header('location: /home');
-                    exit();
+                    redirect('home/signin');
                 } else {
                     $this->setMsg(getLang("البيانات غير صحيحة", "Data is not Valid"));
-                    redirect('/home/signin');
+                    redirect('home/signin');
                 }
             } else {
                 global $title;
@@ -305,6 +302,6 @@ class home extends AbstractController
                 setEnglish();
                 break;
         }
-        redirect();
+        // redirect();
     }
 }

@@ -1,4 +1,8 @@
-<?php $this->getMsg(); ?>
+<?php $this->getMsg();
+echo "<pre>";
+var_dump( Session::User() ); 
+echo "</pre>";
+?>
 <div class="sign sign-in col-lg-4 col-md-6 col-11">
     <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
         <span class="icon">

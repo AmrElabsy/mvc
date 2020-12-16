@@ -3,7 +3,7 @@ $doctors = $this->data['doctor'];
 ?>
 <div class="container-fluid">
     <div class="row Accept-doctor">
-        <div class="col-lg-4 col-md-4 col-sm-6"><?php echo لgetlang( " بيانات كل الأطباء   " , " Data_of_all_doctors "); ?></div>
+        <div class="col-lg-4 col-md-4 col-sm-6"><?php echo getlang( " بيانات كل الأطباء   " , " Data_of_all_doctors "); ?></div>
         <div class="col-lg-2 col-md-4 col-sm-6 offset-lg-6 offset-md-4">
             <a class="btn btn-danger" href="#"><i class="fa fa-user-plus"></i> <?php echo getlang(  " قبول طبيب جديد  " , " Accept_new_doctor "); ?></a>
         </div>

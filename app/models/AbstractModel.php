@@ -2,6 +2,9 @@
 
 class AbstractModel
 {
+    protected $id;
+    protected static $tableName;
+
     public static function getCount()
     {
         global $con;
@@ -65,4 +68,9 @@ class AbstractModel
             return 0;
         }
     }
+
+    public function getId() {
+        return $this->id;
+    }
+
 }

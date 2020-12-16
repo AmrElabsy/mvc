@@ -194,14 +194,14 @@ function uploadImage($folder, $number, $image)
 /* Special cases: */
 /* 'self' ==> the same page */
 /* 'back' ==> the page that user comes from before that page */
-function redirect($path = '/his')
+function redirect($path = '/mvc')
 {
     if ($path == 'back') {
         header('location: ' . $_SERVER['HTTP_REFERER']);
     } elseif ($path == 'self'){
         header('location: ' . $_SERVER['REQUEST_URI']);
     } else {
-        header('location: ' . $path);
+        header('location: /mvc/' . $path);
     }
     exit();
 }

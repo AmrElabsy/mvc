@@ -7,9 +7,9 @@
     $url = $_SERVER['REQUEST_URI'];
 
     $url = trim($url, "/");
-    $url = explode("/", $url, 3);
+    $url = explode("/", $url, 4);
 
-    if ($url[0] == "his") {
+    if ($url[0] == "mvc") {
         array_shift($url);
     }
     
@@ -46,7 +46,7 @@
 
 
     include "app/Controllers/" . $controller . "controller.php";
-
+    echo $action;
     if (!method_exists($controller, $action)) {
         $action = $notFound;
     }

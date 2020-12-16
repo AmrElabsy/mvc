@@ -3,7 +3,7 @@
 
 class doctorModel extends AbstractModel
 {
-    public $id;
+    protected $id;
     public $name;
     public $arabname;
     public $engname;

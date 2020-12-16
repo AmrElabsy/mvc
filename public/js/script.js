@@ -19,10 +19,18 @@ $(document).ready(function () {
     // This **MUST** be removed when the project is Deployed on a server
     $("a").click(function(event) {
         event.preventDefault();
-        var href =  "his/" + $(this).attr("href");
-        console.log(href);
+        var href =  "mvc/" + $(this).attr("href");
         window.location =href;
     });
+
+    $("form").action = "mvc/" + $("form").action;
+    // $("form").submit(function(event) {
+    //     event.preventDefault();
+    //     var action =  "mvc/" + $(this).attr("action");
+    //     $(this).action = action;
+    //     console.log( $(this) );
+    //     $(this).submit();
+    // });
 
     myInput.focus(function () {
         $(this).css({

@@ -1,0 +1,28 @@
+<?php
+
+    class permissionModel extends AbstractModel
+    {
+        protected static $tableName = 'permissions';
+
+        protected $id;
+        private $permission;
+
+        public function __construct($id)
+        {
+            global $con;
+
+            $stmt = $con->prepare("SELECT * FROM " . self::$tableName . " WHERE id = ?");
+            $stmt->execute([$id]);
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $this->id = $id;
+            $this->permission = $row['permission'];
+
+        }
+
+        public function getPermission() {
+            return $this->permission;
+        }
+
+    }

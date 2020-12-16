@@ -8,16 +8,11 @@
         {
             global $page;
             $page = 'admin-dashboard';
-            if (isAdmin()) {
+            if (true) {
                 $this->data['numberInWeek'] = examinationModel::numberInWeek();
                 $this->data['percentageOfDone'] = examinationModel::doneInWeek();
                 $this->data['todaysPatients'] = examinationModel::getToday();
                 $this->data['oldAndNewStats'] = examinationModel::oldAndNewStats();
-
-                $arr = json_encode($this->data['oldAndNewStats']);
-                $file = fopen(JSON_PATH . 'file.json', 'w');
-                fwrite($file, $arr);
-                fclose($file);
 
                 $this->data['finishedappointments'] = examinationModel::finishedAppointments();
                 $this->data['waitingappointments'] = examinationModel::waitingAppointments();
