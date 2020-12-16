@@ -6,23 +6,30 @@ class home extends AbstractController
 {
     public function index()
     {
-        global $page;
-        global $title;
+        if (Auth::can("show dashboard")) {
+            global $page;
+            global $title;
 
-        $page = 'home';
-        $title =  getLang("الصفحة الرئيسية ", ' Home');
+            $page = 'home';
+            $title =  getLang("الصفحة الرئيسية ", ' Home');
 
-        $user = new userModel(1);
-        $roles = $user->getRoles();
-        var_dump( $user->hasPermission("edit post") );
-        var_dump( Session::User() );
-        $this->data['doctors'] = doctorModel::getDoctorsByLimit(6);
-        $this->data['clinics'] = clinicModel::getClinicsByLimit(6);
-        $this->data['countOfClinics'] = clinicModel::getCount();
-        $this->data['countOFDoctors'] = doctorModel::getCount();
-        $this->data['countOfPatients'] = patientModel::getCount();
+            $user = new userModel(1);
+            $roles = $user->getRoles();
+            var_dump( $user->hasPermission("edit post") );
+            var_dump( Session::User() );
+            $this->data['doctors'] = doctorModel::getDoctorsByLimit(6);
+            $this->data['clinics'] = clinicModel::getClinicsByLimit(6);
+            $this->data['countOfClinics'] = clinicModel::getCount();
+            $this->data['countOFDoctors'] = doctorModel::getCount();
+            $this->data['countOfPatients'] = patientModel::getCount();
 
-        $this->view();
+            $this->view();
+        } else {
+            redirect("home/signin");
+            // echo "cannot show dashboard";
+        }
+        exit();
+        
     }
 
     public function signup()
