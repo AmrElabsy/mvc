@@ -5,7 +5,6 @@
         private static $user;
 
         public static function userId() {
-            // return 1;
             if ( isset ( $_SESSION['id'] ) ) {
                 return $_SESSION['id'];
             } else {
@@ -20,16 +19,30 @@
                 } else {
                     return self::UserKey($key);
                 }
-
             } else {
                 return null;
             }
+        }
+
+        public static function setTempSession($id) {
+            $_SESSION['tempSession'] = $id;
+        }
+
+        public static function isSetTemp() {
+            return isset( $_SESSION['tempSession'] );
+        }
+
+        public static function getTemp() {
+            return $_SESSION['tempSession'];
+        }
+
+        public static function signIn($id) {
+            $_SESSION['id'] = $id;
         }
 
         private static function UserKey($key) {
             $key = "get" . ucfirst($key);
             return self::$user->$key();
         }
-
 
     }

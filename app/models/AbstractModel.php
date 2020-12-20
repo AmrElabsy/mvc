@@ -40,33 +40,47 @@ class AbstractModel
         return $newImage;
     }
 
-    public static function isValidSignIn($name, $pass)
-    {
+    public static function isValidSignIn($name, $pass) {
         global $con;
 
-        $stmt = $con->prepare('SELECT * FROM ' . static::$tableName . ' WHERE arabname = ? OR engname = ?');
-        $stmt->execute(array($name, $name));
+        $stmt = $con->prepare('SELECT * FROM ' . static::$tableName . ' WHERE name = ?');
+        $stmt->execute( [$name] );
         $count = $stmt->rowCount();
 
         if ($count > 0) {
             $row = $stmt->fetch();
-            $engname = $row['engname'];
             $salt = $row['salt'];
 
             $hashed = getHashed($pass, $salt);
 
-            $stmt = $con->prepare('SELECT * FROM ' . static::$tableName . ' WHERE engname = ? AND password = ?');
-            $stmt->execute(array($engname, $hashed));
+            $stmt = $con->prepare('SELECT * FROM ' . static::$tableName . ' WHERE name = ? AND password = ?');
+            $stmt->execute( [$name, $hashed] );
             $row = $stmt->fetch();
             $count = $stmt->rowCount();
             if ($count > 0) {
-                return $row['id'];
+                Session::setTempSession($row['id']);
+                return true;
             } else {
-                return 0;
+                return false;
             }
         } else {
-            return 0;
+            return false;
         }
+    }
+
+    public static function getSignInErrorMsg( $name ) {
+        global $con;
+
+        $stmt = $con->prepare('SELECT name FROM ' . static::$tableName . ' WHERE name = ?');
+        $stmt->execute( [$name] );
+        $count = $stmt->rowCount();
+
+        if ($count > 0) {
+            return "No User With Such a Name";
+        } else {
+            return "Wrong Password";
+        }
+
     }
 
     public function getId() {

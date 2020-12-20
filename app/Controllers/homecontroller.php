@@ -228,45 +228,20 @@ class home extends AbstractController
 
     public function signin()
     {
-        if (isVisitor()) {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $validation = new proxy();
-                $name = $_POST['name'];
-                $pass = $_POST['pass'];
+        if ( Session::User() === null ) {
+            if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+                $name = Request::post("name");
+                $pass = Request::post("pass");
 
-                $name = $validation->validString($name);
-                $pass = $validation->validString($pass);
-
-                if (doctorModel::isValidSignIn($name, $pass) > 0) {
-                    $id = doctorModel::isValidSignIn($name, $pass);
-                    $doctor = new doctorModel($id);
-                    if ($doctor->isActivated) {
-                        $_SESSION['id'] = $id;
-                        //$this->setMsg($id);
-                        $_SESSION['auth'][] = 'doctor';
-                        if ($doctor->access == 1) {
-                            $_SESSION['auth'][] = 'admin';
-                            $_SESSION['id'] = $id;
-                        }
-                        redirect('home/signin');
-                    } else {
-                        $this->setMsg(getLang("لم يتم تفعيل هذا الحساب بعد", "This Account is not Activated."));
-                        redirect('home/signin');
-                    }
-                } elseif (patientModel::isValidSignIn($name, $pass) > 0) {
-                    $id = patientModel::isValidSignIn($name, $pass);
-                    $_SESSION['pat_id'] = $id;
-                    $_SESSION['auth'][] = 'patient';
-                    redirect('home/signin');
-                } elseif (receptionistModel::isValidSignIn($name, $pass) > 0) {
-                    $id = receptionistModel::isValidSignIn($name, $pass);
-                    $_SESSION['rec_id'] = $id;
-                    $_SESSION['auth'][] = 'receptionist';
-                    redirect('home/signin');
+                if( userModel::isValidSignIn($name, $pass) ) {
+                    Auth::SignIn();
                 } else {
-                    $this->setMsg(getLang("البيانات غير صحيحة", "Data is not Valid"));
-                    redirect('home/signin');
+                    $msg = userModel::getSignInErrorMsg( $name );
+                    Message::addErrorMsg($msg);
                 }
+
+                
+
             } else {
                 global $title;
                 global $page;
@@ -277,6 +252,55 @@ class home extends AbstractController
         } else {
             redirect();
         }
+        // if (isVisitor()) {
+        //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //         $validation = new proxy();
+        //         $name = $_POST['name'];
+        //         $pass = $_POST['pass'];
+
+        //         $name = $validation->validString($name);
+        //         $pass = $validation->validString($pass);
+
+        //         if (doctorModel::isValidSignIn($name, $pass) > 0) {
+        //             $id = doctorModel::isValidSignIn($name, $pass);
+        //             $doctor = new doctorModel($id);
+        //             if ($doctor->isActivated) {
+        //                 $_SESSION['id'] = $id;
+        //                 //$this->setMsg($id);
+        //                 $_SESSION['auth'][] = 'doctor';
+        //                 if ($doctor->access == 1) {
+        //                     $_SESSION['auth'][] = 'admin';
+        //                     $_SESSION['id'] = $id;
+        //                 }
+        //                 redirect('home/signin');
+        //             } else {
+        //                 $this->setMsg(getLang("لم يتم تفعيل هذا الحساب بعد", "This Account is not Activated."));
+        //                 redirect('home/signin');
+        //             }
+        //         } elseif (patientModel::isValidSignIn($name, $pass) > 0) {
+        //             $id = patientModel::isValidSignIn($name, $pass);
+        //             $_SESSION['pat_id'] = $id;
+        //             $_SESSION['auth'][] = 'patient';
+        //             redirect('home/signin');
+        //         } elseif (receptionistModel::isValidSignIn($name, $pass) > 0) {
+        //             $id = receptionistModel::isValidSignIn($name, $pass);
+        //             $_SESSION['rec_id'] = $id;
+        //             $_SESSION['auth'][] = 'receptionist';
+        //             redirect('home/signin');
+        //         } else {
+        //             $this->setMsg(getLang("البيانات غير صحيحة", "Data is not Valid"));
+        //             redirect('home/signin');
+        //         }
+        //     } else {
+        //         global $title;
+        //         global $page;
+        //         $page = 'login';
+        //         $title = getLang("تسجيل الدخول", ' Login');
+        //         $this->view();
+        //     }
+        // } else {
+        //     redirect();
+        // }
     }
 
     public function makeappointment()

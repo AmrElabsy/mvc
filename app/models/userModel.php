@@ -10,8 +10,7 @@
         private $roles;
         private $permissions;
         
-        public function __construct($id)
-        {
+        public function __construct($id) {
             global $con;
             $stmt = $con->prepare("SELECT * FROM ". self::$tableName . " WHERE id = ?");
             // var_dump($stmt);
@@ -35,8 +34,7 @@
             return $this->email;
         }
 
-        private function setRoles()
-        {
+        private function setRoles() {
             global $con;
 
             $stmt = $con->prepare("SELECT roles.id, roles.role FROM user_role INNER JOIN roles ON user_role.role_id = roles.id WHERE user_id = ?");
@@ -62,8 +60,7 @@
             $this->permissions = $userPermissions;
         }
 
-        public function getRoles()
-        {
+        public function getRoles() {
             return $this->roles;
         }
 
@@ -89,6 +86,7 @@
             }
             return false;
         }
+
 
         
     }

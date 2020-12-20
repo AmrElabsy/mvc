@@ -22,3 +22,4 @@
 
     include "session.php";
     include "auth.php";
+    include "Message.php";

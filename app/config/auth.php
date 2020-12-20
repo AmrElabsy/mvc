@@ -19,4 +19,10 @@ class Auth
             return false;
         }
     }
+
+    public static function SignIn() {
+        if ( Session::isSetTemp() ) {
+            Session::SignIn( Session::getTemp() );
+        }
+    }
 }
