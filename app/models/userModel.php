@@ -13,12 +13,8 @@
         public function __construct($id) {
             global $con;
             $stmt = $con->prepare("SELECT * FROM ". self::$tableName . " WHERE id = ?");
-            // var_dump($stmt);
             $stmt->execute(array($id));
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($id);
-            var_dump($row);
-
             $this->id = $id;
             $this->name = $row["name"];
             $this->email =  $row['email'];
@@ -69,7 +65,6 @@
         }
 
         public function hasRole($role) {
-            var_dump($this->roles);
             foreach ($this->roles as $userRole) {
                 if ( $role == $userRole->role )
                     return true;

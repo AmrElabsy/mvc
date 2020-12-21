@@ -1,4 +1,4 @@
-<div class="accountbg" style="background: url('assets/images/bg.jpg');background-size: cover;background-position: center;"></div>
+<div class="accountbg" style="background: url('<?= asset(); ?>images/bg.jpg');background-size: cover;background-position: center;"></div>
 
         <div class="account-pages mt-5 pt-5">
             <div class="container">
@@ -8,14 +8,14 @@
                             <div class="card-body">
                                 <div class="text-center mt-4">
                                     <div class="mb-3">
-                                        <a href="index.html"><img src="assets/images/logo.png" height="30" alt="logo"></a>
+                                        <a href="<?= path(); ?>"><img src="<?= asset("images/logo.png"); ?>" height="30" alt="logo"></a>
                                     </div>
                                 </div>
                                 <div class="p-3">
                                     <h4 class="font-size-18 mt-2 text-center">Welcome Back !</h4>
                                     <p class="text-muted text-center mb-4">Sign in to continue to Admiria.</p>
     
-                                    <form class="form-horizontal" action="<?= $_SERVER['REQUEST_URI'] ?>">
+                                    <form class="form-horizontal" action="<?= path("home/signin"); ?>" method="post">
                                         <div class="form-group">
                                             <label for="name">Username</label>
                                             <input type="text" class="form-control" id="rname" placeholder="Enter username" name="name">
@@ -48,8 +48,7 @@
                             </div>
                         </div>
                         <div class="mt-5 text-center">
-                            <p class="text-white">Don't have an account ? <a href="pages-register.html" class="font-weight-bold text-primary"> Signup Now </a> </p>
-                            <p class="text-white">2017 - 2020 © Admiria. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            <p class="text-white">Don't have an account ? <a href="<?= path("home/signup"); ?>" class="font-weight-bold text-primary"> Signup Now </a> </p>
                         </div>
     
                     </div>

@@ -25,4 +25,13 @@ class Auth
             Session::SignIn( Session::getTemp() );
         }
     }
+
+    public static function isSignedIn() {
+        echo Session::User();
+        return Session::User() !== null;
+    }
+
+    public static function logout() {
+        unset($_SESSION['id']);
+    }
 }

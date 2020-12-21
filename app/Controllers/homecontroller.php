@@ -6,7 +6,7 @@ class home extends AbstractController
 {
     public function index()
     {
-        if (Auth::can("show dashboard")) {
+        if (!Auth::can("show dashboard")) {
             global $page;
             global $title;
 
@@ -15,8 +15,6 @@ class home extends AbstractController
 
             $user = new userModel(1);
             $roles = $user->getRoles();
-            var_dump( $user->hasPermission("edit post") );
-            var_dump( Session::User() );
             $this->data['doctors'] = doctorModel::getDoctorsByLimit(6);
             $this->data['clinics'] = clinicModel::getClinicsByLimit(6);
             $this->data['countOfClinics'] = clinicModel::getCount();
@@ -25,11 +23,10 @@ class home extends AbstractController
 
             $this->view();
         } else {
-            redirect("home/signin");
+            // echo "Fucking Test";
+            Redirect::to("home/signin");
             // echo "cannot show dashboard";
-        }
-        exit();
-        
+        }        
     }
 
     public function signup()
@@ -228,7 +225,7 @@ class home extends AbstractController
 
     public function signin()
     {
-        if ( Session::User() === null ) {
+        if ( !Auth::isSignedIn() ) {
             if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
                 $name = Request::post("name");
                 $pass = Request::post("pass");
@@ -239,18 +236,15 @@ class home extends AbstractController
                     $msg = userModel::getSignInErrorMsg( $name );
                     Message::addErrorMsg($msg);
                 }
-
-                
-
             } else {
                 global $title;
                 global $page;
                 $page = 'login';
-                $title = getLang("تسجيل الدخول", ' Login');
+                // $title = getLang("تسجيل الدخول", ' Login');
                 $this->view();
             }
         } else {
-            redirect();
+            // Redirect::home();
         }
         // if (isVisitor()) {
         //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {

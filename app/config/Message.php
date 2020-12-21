@@ -2,7 +2,7 @@
 class Message
 {
     public static function addErrorMsg( $msg ) {
-        $_SESSION['error_msg'][] = $msg;
+        $_SESSION['error_msgs'][] = $msg;
         self::setError();
     }
 
@@ -24,20 +24,19 @@ class Message
 
     public static function getErrorMsgs() {
         if ( self::isSetError() ) {
-            return $_SESSION['error_msg'];
+            return $_SESSION['error_msgs'];
         } else {
             return [];
         }
     }
 
     public static function addSuccessMsg( $msg ) {
-        $_SESSION['success_msg'][] = $msg;
+        $_SESSION['success_msgs'][] = $msg;
         self::setSuccess();
     }
     
     private static function setSuccess() {
         $_SESSION['success'] = true;
-
     }
 
     public static function isSetSuccessMsg() {
@@ -55,7 +54,7 @@ class Message
     public static function getSuccessMsgs() {
         if ( self::isSetSuccessMsg() ) {
             self::removeSuccessMsg();
-            return $_SESSION['success_msg'];
+            return $_SESSION['success_msgs'];
         } else {
             return [];
         }

@@ -9,9 +9,10 @@
     $url = trim($url, "/");
     $url = explode("/", $url, 4);
 
-    if ($url[0] == "mvc") {
+    if ($url[0] == trim(BASE_URL, "/" ) ) {
         array_shift($url);
     }
+
     
     # Set The Value of $controller
     if (isset($url[0]) && $url[0] != "") {
@@ -46,7 +47,6 @@
 
 
     include "app/Controllers/" . $controller . "controller.php";
-    echo $action;
     if (!method_exists($controller, $action)) {
         $action = $notFound;
     }
@@ -55,7 +55,7 @@
 
     spl_autoload_register(function ($mdl){
         $modelFile = APP_PATH . "models/" . $mdl . ".php";
-        include $modelFile;
+        require_once $modelFile;
     });
 
     # Execute The Action from The Controller

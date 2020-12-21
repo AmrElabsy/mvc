@@ -1,7 +1,8 @@
 <?php
-
-    include "app/config/db.php";
-    include "app/config/functions.php";
+    define("BASE_URL", "/mvc/");
+    
+    require_once "app/config/db.php";
+    require_once "app/config/functions.php";
 
     if (!isset($_SESSION['lang'])) {
         include "app/config/languages/arabic.php";
@@ -14,12 +15,14 @@
     define('PUBLIC_PATH', "public/");
     define('LANG_PATH', APP_PATH . 'config/languages/');
     define('TEMP_PATH', PUBLIC_PATH . "templates/");
-    define('STATIC_PATH', "mvc/" . PUBLIC_PATH);
-    define('CSS_PATH', STATIC_PATH  . 'css/');
+    define('STATIC_PATH', "mvc/" . PUBLIC_PATH);    define('CSS_PATH', STATIC_PATH  . 'css/');
     define('JS_PATH',STATIC_PATH . 'js/');
     define('JSON_PATH', STATIC_PATH . 'json/');
     define('IMAGES_PATH', STATIC_PATH . "images/");
 
-    include "session.php";
-    include "auth.php";
-    include "Message.php";
+    require_once "session.php";
+    require_once "auth.php";
+    require_once "Message.php";
+    require_once "Redirect.php";
+    require_once "request.php";
+    require_once "asset.php";

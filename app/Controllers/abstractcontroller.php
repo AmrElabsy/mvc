@@ -1,23 +1,11 @@
 <?php
 include 'proxy.php';
-include 'singleton.php';
 
 class AbstractController
 {
     protected $data = array();
 
-    public function __construct()
-    {
-        global $myAcc;
-        if (isDoctor()) {
-            $this->data['myAcc'] = new doctorModel($_SESSION['doc_id']);
-        } elseif (isAdmin()) {
-            $this->data['myAcc'] = new doctorModel($_SESSION['admin_id']);
-        } elseif (isPatient()) {
-            $this->data['myAcc'] = new doctorModel($_SESSION['pat_id']);
-        } elseif (isReceptionist()) {
-            $this->data['myAcc'] = new receptionistModel($_SESSION['rec_id']);
-        }
+    public function __construct() {
     }
 
     public function notfound()
@@ -34,11 +22,10 @@ class AbstractController
         $view = APP_PATH . 'views/' . $controller . "/" . $action . ".view.php";
 
         if (file_exists($view)) {
-            $footer = singleton::getInstance();
             include TEMP_PATH . "header.temp.php";
             include TEMP_PATH . "nav.temp.php";
             include $view;
-            $footer->getFooter();
+            include TEMP_PATH . "footer.temp.php";
         } else {
             $controller = $notFound;
             $action = $notFound;

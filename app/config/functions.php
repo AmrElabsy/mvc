@@ -23,17 +23,6 @@ function setActive($pageName)
     }
 }
 
-/* Function for the Navigation bar of the Patient Profile */
-/* Needs the variable $pageName to be assigned and called in the nav of the profile */
-function patSetActive($pageName)
-{
-    global $patPage;
-    if ($patPage == $pageName){
-        echo "class = 'active'";
-    }
-}
-
-
 /** ****************** **/
 /** Language Functions **/
 /** ****************** **/
@@ -204,6 +193,14 @@ function redirect($path = '/mvc')
         header('location: /mvc/' . $path);
     }
     exit();
+}
+
+function path( $path = "" ) {
+    return BASE_URL . $path;
+}
+
+function asset($file = "") {
+    return STATIC_PATH . $file;
 }
 
 function isPatient()
