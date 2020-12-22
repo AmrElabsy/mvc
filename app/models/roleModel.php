@@ -50,4 +50,8 @@
             return false;
         }
 
+        public function getRole() {
+            return $this->role;
+        }
+
     }

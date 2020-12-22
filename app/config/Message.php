@@ -20,11 +20,14 @@ class Message
 
     private static function removeErrorMsg() {
         $_SESSION['error'] = false;
+        $_SESSION['error_msgs'] = [];
     }
 
     public static function getErrorMsgs() {
         if ( self::isSetError() ) {
-            return $_SESSION['error_msgs'];
+            $msgs = $_SESSION['error_msgs'];
+            self::removeErrorMsg();
+            return $msgs;
         } else {
             return [];
         }
@@ -49,12 +52,14 @@ class Message
 
     private static function removeSuccessMsg() {
         $_SESSION['success'] = false;
+        $_SESSION['success_msgs'] = [];
     }
 
     public static function getSuccessMsgs() {
         if ( self::isSetSuccessMsg() ) {
+            $msgs = $_SESSION['success_msgs'];
             self::removeSuccessMsg();
-            return $_SESSION['success_msgs'];
+            return $msgs;
         } else {
             return [];
         }

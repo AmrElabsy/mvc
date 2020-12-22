@@ -5,8 +5,7 @@ class AbstractModel
     protected $id;
     protected static $tableName;
 
-    public static function getCount()
-    {
+    public static function getCount() {
         global $con;
 
         $stmt = $con->prepare("SELECT COUNT(*) FROM " . static::$tableName);
@@ -15,8 +14,7 @@ class AbstractModel
         return $stmt->fetchColumn();
     }
 
-    public static function isFound($column, $value)
-    {
+    public static function isFound($column, $value) {
         global $con;
 
         $stmt = $con->prepare("SELECT * FROM " . static::$tableName . " WHERE " . $column . " = ?");
@@ -26,8 +24,7 @@ class AbstractModel
         return $count > 0 ? true : false;
     }
 
-    public static function getNewImageNumber()
-    {
+    public static function getNewImageNumber() {
         global $con;
         $stmt = $con->prepare('SELECT image FROM ' . static::$tableName . ' ORDER BY CAST(image as int) DESC LIMIT 1');
         $stmt->execute();
@@ -75,7 +72,7 @@ class AbstractModel
         $stmt->execute( [$name] );
         $count = $stmt->rowCount();
 
-        if ($count > 0) {
+        if ($count == 0) {
             return "No User With Such a Name";
         } else {
             return "Wrong Password";

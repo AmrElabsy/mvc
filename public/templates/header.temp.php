@@ -4,17 +4,8 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?php getTitle() ?></title>
-   
-    <link rel="stylesheet" type="text/css" href="<?php echo CSS_PATH ?>style.css">
-
-    <link href="<?php echo CSS_PATH ?>a/c3/c3.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- Bootstrap Css -->
-    <link href="<?php echo CSS_PATH ?>a/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="<?php echo CSS_PATH ?>a/icons.min.css" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="<?php echo CSS_PATH ?>a/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    
+    <?php Asset::linkCssFiles(); ?>
 
 </head>
 <body data-sidebar="dark">

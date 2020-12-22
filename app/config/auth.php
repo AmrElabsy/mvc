@@ -27,7 +27,6 @@ class Auth
     }
 
     public static function isSignedIn() {
-        echo Session::User();
         return Session::User() !== null;
     }
 

@@ -2,37 +2,27 @@
 
 class Asset
 {
-    public static $cssInstance = null;
-    public static $jsInstance = null;
+    private static $cssFiles = [];
+    private static $jsFiles = [];
 
-    private $cssFiles = [];
-    private $jsFiles = [];
-
-
-    private function __construct() {
-
+    public static function addCss( $cssFile ) {
+        self::$cssFiles[] = $cssFile;
     }
 
-    public static function getCss() {
-        if ( self::$cssInstance == null ) {
-            self::$cssInstance = new Asset();
+    public static function addJs($jsFile) {
+        self::$jsFiles[] = $jsFile;
+    }
+
+    public static function linkCssFiles() {
+        foreach ( self::$cssFiles as $cssFile ) {
+            echo "<link href=" . asset($cssFile) . " rel='stylesheet' type='text/css'/>\n";
         }
-        return self::$cssInstance;
     }
 
-    public static function getScripts() {
-        if ( self::$jsInstance == null ) {
-            self::$jsInstance = new Asset();
+    public static function linkJsFiles() {
+        foreach ( self::$jsFiles as $jsFile ) {
+            echo "<script src=" . asset($jsFile) . "></script>\n";
         }
-        return self::$jsInstance;
-    }
-
-    public function addCss( $cssFile ) {
-        $this->cssFiles[] = $cssFile;
-    }
-
-    public function addJs($jsFile) {
-        $this->jsFiles[] = $jsFile;
     }
 
 }

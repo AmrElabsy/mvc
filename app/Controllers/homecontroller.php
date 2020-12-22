@@ -6,12 +6,14 @@ class home extends AbstractController
 {
     public function index()
     {
-        if (!Auth::can("show dashboard")) {
+        if ( Auth::isSignedIn() ) {
             global $page;
             global $title;
 
             $page = 'home';
             $title =  getLang("الصفحة الرئيسية ", ' Home');
+
+            Asset::addJs("js/a/dashboard.init.js");
 
             $user = new userModel(1);
             $roles = $user->getRoles();
@@ -29,8 +31,7 @@ class home extends AbstractController
         }        
     }
 
-    public function signup()
-    {
+    public function signup() {
         if (isVisitor()) {
             global $title;
             global $page;
@@ -111,7 +112,7 @@ class home extends AbstractController
                     if ($this->isSetError()) {
                         redirect('self');
                     } else {
-                        $pass_arr = $this->setHashed($pass);
+                        $pass_arr = setHashed($pass);
                         $pass = $pass_arr['pass'];
                         $salt = $pass_arr['salt'];
 
@@ -196,9 +197,7 @@ class home extends AbstractController
                     if ($this->isSetError()) {
                         redirect('self');
                     } else {
-                        $pass_arr = $this->setHashed($pass);
-                        $pass = $pass_arr['pass'];
-                        $salt = $pass_arr['salt'];
+                        list($pass, $salt) = setHashed($pass);
 
                         $data = array(
                             'arabname' => $arabname,
@@ -232,9 +231,11 @@ class home extends AbstractController
 
                 if( userModel::isValidSignIn($name, $pass) ) {
                     Auth::SignIn();
+                    Redirect::home();
                 } else {
                     $msg = userModel::getSignInErrorMsg( $name );
                     Message::addErrorMsg($msg);
+                    Redirect::self();
                 }
             } else {
                 global $title;
@@ -244,57 +245,8 @@ class home extends AbstractController
                 $this->view();
             }
         } else {
-            // Redirect::home();
+            Redirect::home();
         }
-        // if (isVisitor()) {
-        //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //         $validation = new proxy();
-        //         $name = $_POST['name'];
-        //         $pass = $_POST['pass'];
-
-        //         $name = $validation->validString($name);
-        //         $pass = $validation->validString($pass);
-
-        //         if (doctorModel::isValidSignIn($name, $pass) > 0) {
-        //             $id = doctorModel::isValidSignIn($name, $pass);
-        //             $doctor = new doctorModel($id);
-        //             if ($doctor->isActivated) {
-        //                 $_SESSION['id'] = $id;
-        //                 //$this->setMsg($id);
-        //                 $_SESSION['auth'][] = 'doctor';
-        //                 if ($doctor->access == 1) {
-        //                     $_SESSION['auth'][] = 'admin';
-        //                     $_SESSION['id'] = $id;
-        //                 }
-        //                 redirect('home/signin');
-        //             } else {
-        //                 $this->setMsg(getLang("لم يتم تفعيل هذا الحساب بعد", "This Account is not Activated."));
-        //                 redirect('home/signin');
-        //             }
-        //         } elseif (patientModel::isValidSignIn($name, $pass) > 0) {
-        //             $id = patientModel::isValidSignIn($name, $pass);
-        //             $_SESSION['pat_id'] = $id;
-        //             $_SESSION['auth'][] = 'patient';
-        //             redirect('home/signin');
-        //         } elseif (receptionistModel::isValidSignIn($name, $pass) > 0) {
-        //             $id = receptionistModel::isValidSignIn($name, $pass);
-        //             $_SESSION['rec_id'] = $id;
-        //             $_SESSION['auth'][] = 'receptionist';
-        //             redirect('home/signin');
-        //         } else {
-        //             $this->setMsg(getLang("البيانات غير صحيحة", "Data is not Valid"));
-        //             redirect('home/signin');
-        //         }
-        //     } else {
-        //         global $title;
-        //         global $page;
-        //         $page = 'login';
-        //         $title = getLang("تسجيل الدخول", ' Login');
-        //         $this->view();
-        //     }
-        // } else {
-        //     redirect();
-        // }
     }
 
     public function makeappointment()
@@ -308,25 +260,7 @@ class home extends AbstractController
 
     public function logout()
     {
-
-        if (isArabic()) {
-            $lang = 'arabic';
-        } else if (isEnglish()) {
-            $lang = 'english';
-        } else {
-            $lang = 'arabic';
-        }
-        session_unset();
-        session_destroy();
-
-        switch ($lang) {
-            case 'arabic':
-                setArabic();
-                break;
-            case 'english':
-                setEnglish();
-                break;
-        }
-        // redirect();
+        Auth::logout();
+        Redirect::home();
     }
 }

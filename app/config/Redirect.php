@@ -13,7 +13,7 @@ class Redirect
     }
 
     public static function home() {
-        $path = "";
+        $path = BASE_URL;
         self::to($path);
     }
 
