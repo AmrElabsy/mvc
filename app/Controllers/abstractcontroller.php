@@ -9,8 +9,7 @@ class AbstractController
         Asset::addCss("css/a/c3/c3.min.css");
         Asset::addCss("css/a/bootstrap.min.css");
         Asset::addCss("css/a/icons.min.css");
-        Asset::addCss("css/a/app.min.css");
-        Asset::addCss("css/style.css");
+        Asset::addCss("css/a/app-rtl.min.css", "css/a/app.min.css", Language::directionIsRtl() );
         
         Asset::addJs("js/libs/jquery/jquery.min.js");
         Asset::addJs("js/libs/bootstrap/js/bootstrap.bundle.min.js");
@@ -21,8 +20,8 @@ class AbstractController
         Asset::addJs("js/libs/d3/d3.min.js");
         Asset::addJs("js/libs/c3/c3.min.js");
         Asset::addJs("js/libs/jquery-knob/jquery.knob.min.js");
-        Asset::addJs("js/script.js");
-        Asset::addJs("js/a/app.js");
+        
+
     }
 
     public function notfound() {
@@ -38,8 +37,15 @@ class AbstractController
         $view = APP_PATH . 'views/' . $controller . "/" . $action . ".view.php";
 
         if (file_exists($view)) {
+            Asset::addCss("css/style.css");
+
+            Asset::addJs("js/script.js");
+            Asset::addJs("js/a/app.js");
             include TEMP_PATH . "header.temp.php";
             include TEMP_PATH . "nav.temp.php";
+            foreach($this->data as $key => $value) {
+                $$key = $value;
+            }
             include $view;
             include TEMP_PATH . "footer.temp.php";
         } else {

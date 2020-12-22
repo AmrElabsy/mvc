@@ -15,6 +15,7 @@ class home extends AbstractController
 
             Asset::addJs("js/a/dashboard.init.js");
 
+
             $user = new userModel(1);
             $roles = $user->getRoles();
             $this->data['doctors'] = doctorModel::getDoctorsByLimit(6);
@@ -25,9 +26,7 @@ class home extends AbstractController
 
             $this->view();
         } else {
-            // echo "Fucking Test";
             Redirect::to("home/signin");
-            // echo "cannot show dashboard";
         }        
     }
 

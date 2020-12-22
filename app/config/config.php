@@ -27,3 +27,5 @@
     require_once "Redirect.php";
     require_once "request.php";
     require_once "asset.php";
+    require_once "language.php";
+    require_once "colormode.php";
