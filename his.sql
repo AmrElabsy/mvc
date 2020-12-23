@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2020 at 06:59 PM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Generation Time: Dec 22, 2020 at 09:32 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -88,13 +87,14 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `engname`, `arabname`, `password`, `salt`, `email`, `national_id`, `clinic_id`, `activation`, `image`, `contacts`, `phone`, `access`) VALUES
-(1, 'Ahmed Muhamed', 'أحمد محمد', '123456789', '123456789', 'a@m.com', '123456789', 2, '1', '1.png', '767687678', '0', 0),
+(1, 'Amr El-Absya', 'عمرو العبسيش', '2c6a77fa8e399e3651ad0fa8990e5a96f43bde1e', '5c20d51934', 'amrelabsy555@gmail.com', '29902061800231', 1, '1', '', '', '01554010386', 0),
 (2, 'Yasser Rashed', 'ياسر راشد', '123456', '123456', 'ششش', '123456', 1, '1', '2.png', 'kjbkbjknl', '0', 0),
 (3, 'Ali Muhamed', 'علي محمد', '123456', '123456', 'asdfghjk', '12345679812345', 4, '1', '3.png', 'yfjuuj', '0', 0),
 (4, 'Amr Aly', 'عمرو علي', '123456789', '123456789', 'as', '12345678912345', 1, '1', '4.png', 'gnchj', '0', 0),
 (6, 'Aya Essam', 'آية عصام', '123456789', '123456789', 'as', '1234578912345', 1, '1', '5.png', 'hvjkk,bk', '01066484685', 0),
 (7, 'Fatma Abdelhameed', 'فاطمة عبد الحميد', '132456789', '123456789', 'f@a.com', '1234569987', 1, '1', '6.png', 'nbvhv', '0', 0),
-(9, 'mohamed', 'محمد', '37b6a14e8b4e5e053f7b9d3c846b2917eccbbdc8', '2e1a0d083f', 'mmldskf@gmail.com', '29912260223223', 5, '1', '7.png', '', '01284188740', 1);
+(9, 'mohamed', 'محمد', '37b6a14e8b4e5e053f7b9d3c846b2917eccbbdc8', '2e1a0d083f', 'mmldskf@gmail.com', '29912260223223', 5, '1', '7.png', '', '01284188740', 1),
+(11, 'Ahmed Muhamed', 'أحمد محمد', '123456789', '123456789', 'a@m.com', '123456789', 2, '1', '1.png', '767687678', '0', 0);
 
 -- --------------------------------------------------------
 
@@ -119,15 +119,15 @@ INSERT INTO `doctor_attendance` (`id`, `doctor_id`, `day`) VALUES
 (4, 2, '2019-12-27'),
 (5, 4, '2020-02-03'),
 (16, 7, '2020-02-04'),
-(17, 1, '2020-02-04'),
+(17, 11, '2020-02-04'),
 (18, 2, '2020-02-04'),
 (19, 7, '2020-02-05'),
 (20, 6, '2020-02-05'),
 (21, 4, '2020-02-09'),
 (22, 3, '2020-02-09'),
-(23, 1, '2020-02-09'),
+(23, 11, '2020-02-09'),
 (24, 7, '2020-02-09'),
-(25, 1, '2020-02-11'),
+(25, 11, '2020-02-11'),
 (26, 2, '2020-02-11'),
 (27, 3, '2020-02-11'),
 (28, 4, '2020-02-11'),
@@ -178,7 +178,7 @@ INSERT INTO `examinations` (`id`, `date`, `time`, `doctor_id`, `patient_id`, `st
 (8, '2019-12-20', '00:00:00', 7, 2, 0),
 (9, '2019-12-27', '23:00:00', 4, 3, 0),
 (10, '2019-12-27', '02:00:00', 7, 4, 1),
-(11, '2019-12-28', '17:00:00', 1, 6, 0),
+(11, '2019-12-28', '17:00:00', 11, 6, 0),
 (12, '2019-12-27', '09:00:00', 9, 2, 0),
 (13, '2019-12-27', '11:00:00', 9, 1, 1),
 (14, '2020-01-01', '09:00:00', 9, 2, 0),
@@ -314,6 +314,30 @@ INSERT INTO `patient_contacts` (`id`, `patient_id`, `icon`, `contact`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` int(11) NOT NULL,
+  `permission` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `permission`) VALUES
+(1, 'add user'),
+(2, 'edit user'),
+(3, 'delete user'),
+(4, 'activate user'),
+(5, 'add post'),
+(6, 'edit post'),
+(7, 'delete post');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prescriptions`
 --
 
@@ -359,6 +383,52 @@ INSERT INTO `receptionists` (`id`, `arabname`, `engname`, `password`, `salt`, `i
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `role` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`) VALUES
+(1, 'Admin'),
+(2, 'Moderator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_permission`
+--
+
+CREATE TABLE `role_permission` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `role_permission`
+--
+
+INSERT INTO `role_permission` (`id`, `role_id`, `permission_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 2, 5),
+(9, 2, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `scans`
 --
 
@@ -366,6 +436,46 @@ CREATE TABLE `scans` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `salt`) VALUES
+(1, 'Amr El-Absy', 'a@a.com', '123456', '134679');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
+(2, 1, 2);
 
 --
 -- Indexes for dumped tables
@@ -464,6 +574,12 @@ ALTER TABLE `patient_contacts`
   ADD KEY `patient_id` (`patient_id`);
 
 --
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
@@ -485,10 +601,39 @@ ALTER TABLE `receptionists`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `role_permission`
+--
+ALTER TABLE `role_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `role_permission_role` (`role_id`),
+  ADD KEY `role_permission_permission_` (`permission_id`);
+
+--
 -- Indexes for table `scans`
 --
 ALTER TABLE `scans`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_role_user` (`user_id`),
+  ADD KEY `user_role_role` (`role_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -510,7 +655,7 @@ ALTER TABLE `diagnosis`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `doctor_attendance`
@@ -573,6 +718,12 @@ ALTER TABLE `patient_contacts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `prescriptions`
 --
 ALTER TABLE `prescriptions`
@@ -591,10 +742,34 @@ ALTER TABLE `receptionists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `role_permission`
+--
+ALTER TABLE `role_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `scans`
 --
 ALTER TABLE `scans`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_role`
+--
+ALTER TABLE `user_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -622,8 +797,8 @@ ALTER TABLE `doctor_contacts`
 -- Constraints for table `examinations`
 --
 ALTER TABLE `examinations`
-  ADD CONSTRAINT `examinations_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`),
-  ADD CONSTRAINT `examinations_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`);
+  ADD CONSTRAINT `examinations_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `examinations_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `examination_analysis`
@@ -664,6 +839,20 @@ ALTER TABLE `prescriptions`
 ALTER TABLE `prescription_med`
   ADD CONSTRAINT `prescription_med_ibfk_1` FOREIGN KEY (`medicine_id`) REFERENCES `medicines` (`id`),
   ADD CONSTRAINT `prescription_med_ibfk_2` FOREIGN KEY (`prescription_id`) REFERENCES `prescriptions` (`id`);
+
+--
+-- Constraints for table `role_permission`
+--
+ALTER TABLE `role_permission`
+  ADD CONSTRAINT `role_permission_permission_` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `role_permission_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD CONSTRAINT `user_role_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_role_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

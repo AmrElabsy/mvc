@@ -3,8 +3,12 @@
 class Redirect
 {
     public static function back() {
-        $path = $_SERVER['HTTP_REFERER'];
-        self::to($path);
+        if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+            $path = $_SERVER['HTTP_REFERER'];
+            self::to($path);
+        } else {
+            self::home();
+        }
     }
 
     public static function self() {
@@ -13,7 +17,7 @@ class Redirect
     }
 
     public static function home() {
-        $path = "";
+        $path = BASE_URL;
         self::to($path);
     }
 

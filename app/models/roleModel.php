@@ -7,9 +7,8 @@
         protected $id;
         private $role;
         private $permissions;
-
-        public function __construct($id)
-        {
+        
+        public function __construct($id) {
             global $con;
 
             $stmt = $con->prepare("SELECT * FROM " . self::$tableName . " WHERE id = ?");
@@ -48,6 +47,29 @@
                 }
             }
             return false;
+        }
+
+        public function getRole() {
+            return $this->role;
+        }
+
+        public function getId() {
+            return $this->id;
+        }
+
+        public static function getAll() {
+            global $con;
+
+            $stmt = $con->prepare("SELECT * FROM " . self::$tableName);
+            $stmt->execute();
+            $roles = $stmt->fetchAll( PDO::FETCH_ASSOC );
+            $tempRoles = [];
+
+            foreach ( $roles as $role ) {
+                $tempRole = new roleModel( $role['id'] );
+                $tempRoles[] = $tempRole;
+            }
+            return $tempRoles;
         }
 
     }

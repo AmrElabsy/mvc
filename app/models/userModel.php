@@ -66,7 +66,7 @@
 
         public function hasRole($role) {
             foreach ($this->roles as $userRole) {
-                if ( $role == $userRole->role )
+                if ( $role == $userRole->getRole() )
                     return true;
             }
             return false;

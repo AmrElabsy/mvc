@@ -99,7 +99,7 @@ function setEnglish()
 /* ['salt'] ==> is the salt to be added in a separate column */
 function setHashed($pass)
 {
-    $salt = substr(md5(mt_rand()), 0, 10);
+    $salt = generateSalt();
     $pass = $pass . $salt;
     $hashed = sha1($pass);
     $arr = array(
@@ -108,6 +108,11 @@ function setHashed($pass)
     );
 
     return $arr;
+}
+
+function generateSalt() {
+    $salt = substr( md5( mt_rand() ), 0, 10 );
+    return $salt;
 }
 
 /* Function to return hashed value of gives password and salt */

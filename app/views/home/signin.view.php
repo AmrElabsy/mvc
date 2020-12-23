@@ -6,6 +6,12 @@
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card">
                             <div class="card-body">
+                                <?php foreach ( Message::getErrorMsgs() as $msg ): ?>
+                                    <div class="alert alert-danger bg-danger text-white   mb-0" role="alert">
+                                        <?= $msg ?>
+                                    </div>                        
+                                <?php endforeach; ?>
+                                
                                 <div class="text-center mt-4">
                                     <div class="mb-3">
                                         <a href="<?= path(); ?>"><img src="<?= asset("images/logo.png"); ?>" height="30" alt="logo"></a>

@@ -25,4 +25,24 @@
             return $this->permission;
         }
 
+        public function getId() {
+            return $this->id;
+        }
+
+        public static function getAll() {
+            global $con;
+
+            $stmt = $con->prepare("SELECT * FROM " . self::$tableName);
+            $stmt->execute();
+
+            $permissions = $stmt->fetchAll( PDO::FETCH_ASSOC );
+            $tempPermissions = [];
+
+            foreach( $permissions as $permission ) {
+                $tempPermission = new permissionModel( $permission['id'] );
+                $tempPermissions[] = $tempPermission;
+            }
+
+            return $tempPermissions;
+        }
     }

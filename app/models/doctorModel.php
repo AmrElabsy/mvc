@@ -18,8 +18,7 @@ class doctorModel extends AbstractModel
     protected static $tableName = 'doctors';
 
 
-    public function __construct($id)
-    {
+    public function __construct($id) {
         global $con;
         $this->id = $id;
         $query = "SELECT doctors.*, ";
@@ -117,8 +116,7 @@ class doctorModel extends AbstractModel
         return $count;
     }
 
-    public function update()
-    {
+    public function update() {
         global $con;
         $arabname = $this->arabname;
         $engname = $this->engname;
@@ -142,24 +140,21 @@ class doctorModel extends AbstractModel
         $stmt->execute(array());
     }
 
-    public function setAttended()
-    {
+    public function setAttended() {
         global $con;
         $id = $this->id;
         $stmt = $con->prepare("INSERT INTO doctor_attendance(doctor_id, day) VALUES(?, CURRENT_DATE)");
         $stmt->execute(array($id));
     }
 
-    public function setAbsent()
-    {
+    public function setAbsent() {
         global $con;
         $id = $this->id;
         $stmt = $con->prepare("DELETE FROM doctor_attendance WHERE doctor_id = ? AND day = CURRENT_DATE");
         $stmt->execute(array($id));
     }
 
-    public static function signUp(array $data)
-    {
+    public static function signUp(array $data) {
         global $con;
         $arabname = $data['arabname'];
         $engname = $data['engname'];
