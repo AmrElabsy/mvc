@@ -1,3 +1,4 @@
+            <?php if ( Auth::can("show database") ): ?>
             <header id="page-topbar">
                 <div class="navbar-header">
                     <div class="d-flex">
@@ -465,3 +466,4 @@
                     <!-- Sidebar -->
                 </div>
             </div>
+            <?php endif; ?>

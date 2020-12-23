@@ -6,7 +6,7 @@ class home extends AbstractController
 {
     public function index()
     {
-        if (!Auth::can("show dashboard")) {
+        if (Auth::can("show dashboard")) {
             global $page;
             global $title;
 
