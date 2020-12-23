@@ -7,7 +7,7 @@ class AbstractController
 
     public function __construct() {
         Asset::addCss("css/a/c3/c3.min.css");
-        Asset::addCss("css/a/bootstrap.min.css");
+        Asset::addCss( [ "css/a/bootstrap.min.css", "css/a/bootstrap.rtl.min.css" ], "css/a/bootstrap.min.css", Language::directionIsRtl() );
         Asset::addCss("css/a/icons.min.css");
         Asset::addCss("css/a/app-rtl.min.css", "css/a/app.min.css", Language::directionIsRtl() );
         

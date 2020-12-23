@@ -1,8 +1,9 @@
-<form>
+<form action="<?= path("roles/edit"); ?>" method="POST">
+    <input type="hidden" name="id" value="<?= $role->getId(); ?>">
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Role Name: </label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" value="<?= $role->getRole(); ?>" id="name">
+            <input class="form-control" name="name" type="text" value="<?= $role->getRole(); ?>" id="name">
         </div>
     </div>
     <div class="form-group row">
@@ -16,6 +17,11 @@
                     </div>
                 <?php endforeach; ?>
             </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="offset-md-2">
+            <input type="submit" class="btn btn-success waves-effect waves-light" value="Submit">
         </div>
     </div>
 </form>

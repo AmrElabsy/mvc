@@ -1,6 +1,8 @@
 <?php
 
-class changelanguage
+require_once "abstractcontroller.php";
+
+class changelanguage extends AbstractController
 {
     public function arabic()
     {
@@ -14,6 +16,6 @@ class changelanguage
 
     public function __destruct()
     {
-        Redirect::back();      
+        Redirect::back(); 
     }
 }

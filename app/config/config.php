@@ -29,3 +29,4 @@
     require_once "asset.php";
     require_once "language.php";
     require_once "colormode.php";
+    require_once "validate.php";

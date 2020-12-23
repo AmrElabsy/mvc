@@ -3,7 +3,11 @@
 class Request {
     public static function post($key, $filterType = "string") {
         $var = $_POST[$key];
-        return self::filter($var, $filterType);
+        if ( is_array( $var ) ) {
+            return self::filterArray($var, $filterType);
+        } else {
+            return self::filter($var, $filterType);
+        }
     }
 
     public static function get($key, $filterType = "string") {
@@ -26,5 +30,14 @@ class Request {
 
         }
         return $var;
+    }
+
+    private static function filterArray($array, $filterType) {
+        $output = [];
+        foreach ( $array as $var ) {
+            $output[] = self::filter($var, $filterType);
+        }
+        return $output;
+
     }
 }
