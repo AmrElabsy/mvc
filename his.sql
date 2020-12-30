@@ -2,10 +2,10 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 22, 2020 at 09:32 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Host: localhost:3306
+-- Generation Time: Dec 30, 2020 at 11:24 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -416,15 +416,15 @@ CREATE TABLE `role_permission` (
 --
 
 INSERT INTO `role_permission` (`id`, `role_id`, `permission_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 1, 6),
-(7, 1, 7),
-(8, 2, 5),
-(9, 2, 1);
+(43, 1, 1),
+(44, 1, 2),
+(45, 1, 3),
+(46, 1, 4),
+(47, 1, 5),
+(48, 1, 6),
+(49, 1, 7),
+(54, 2, 1),
+(55, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -456,7 +456,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `salt`) VALUES
-(1, 'Amr El-Absy', 'a@a.com', '123456', '134679');
+(1, 'Amr El-Absy', 'a@a.com', '5491cf163600e4d8fc165695839f04c6cac5470f', 'd41d8cd98f');
 
 -- --------------------------------------------------------
 
@@ -475,7 +475,7 @@ CREATE TABLE `user_role` (
 --
 
 INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
-(2, 1, 2);
+(2, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -643,7 +643,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `clinics`
 --
 ALTER TABLE `clinics`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `diagnosis`
@@ -655,7 +655,7 @@ ALTER TABLE `diagnosis`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `doctor_attendance`
@@ -721,7 +721,7 @@ ALTER TABLE `patient_contacts`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `prescriptions`
@@ -745,13 +745,13 @@ ALTER TABLE `receptionists`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `role_permission`
 --
 ALTER TABLE `role_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `scans`

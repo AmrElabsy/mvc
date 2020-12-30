@@ -210,21 +210,27 @@
                         </li>
 
                         <li>
-                            <a href="widgets.html" class="waves-effect">
-                                <i class="mdi mdi-cube-outline"></i>
-                                <span> Widgets </span>
+                            <a href="<?= path("roles"); ?>" class="waves-effect">
+                                <i class="fa fa-tasks"></i>
+                                <span>Roles</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<?= path("permissions"); ?>" class="waves-effect">
+                                <i class="fas fa-key"></i>
+                                <span>Permissions</span>
                             </a>
                         </li>
 
                         <li>
                             <a href="javascript: void(0);" class="has-arrow waves-effect">
                                 <i class="mdi mdi-email-outline"></i>
-                                <span> Email </span>
+                                <span>Beauty Center</span>
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
-                                <li><a href="email-inbox.html">Inbox</a></li>
-                                <li><a href="email-read.html">Email Read</a></li>
-                                <li><a href="email-compose.html">Email Compose</a></li>
+                                <li><a href="<?= path("beauty"); ?>">Index</a></li>
+                                <li><a href="<?= path("beauty/add"); ?>">Add</a></li>
                             </ul>
                         </li>
 

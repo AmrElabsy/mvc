@@ -2,11 +2,11 @@
 
 include 'abstractcontroller.php';
 
-class roles extends AbstractController
+class permissions extends AbstractController
 {
     public function index() {
         if ( Auth::is("Admin") ) {
-            $this->data['roles'] = roleModel::getAll();
+            $this->data['permissions'] = permissionModel::getAll();
         
             $this->view();
         } else {
@@ -18,20 +18,17 @@ class roles extends AbstractController
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
             $id = Request::post("id");
             $name = Request::post("name");
-            $permissions = Request::post("permissions");
 
-            $role = new roleModel($id);
-            $role->update($name, $permissions);
+            $permission = new permissionModel($id);
+            $permission->update($name);
 
-            Redirect::to("roles");
+            Redirect::to("permissions");
         } else {
             global $param;
             $id = $param[0];
-            $role = new roleModel( $id );
-            $permissions = permissionModel::getAll();
-
-            $this->data['role'] = $role;
-            $this->data['permissions'] = $permissions;
+            $permission = new permissionModel( $id );
+            
+            $this->data['permission'] = $permission;
 
             $this->view();
         }
@@ -40,15 +37,10 @@ class roles extends AbstractController
     public function add() {
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
             $name = Request::post("name");
-            $permissions = Request::post("permissions");
+            permissionModel::add($name);
 
-            roleModel::add($name, $permissions);
-
-            Redirect::to("roles");
+            Redirect::to("permissions");
         } else {
-            $permissions = permissionModel::getAll();
-            $this->data['permissions'] = $permissions;
-
             $this->view();
         }
     }
@@ -58,9 +50,9 @@ class roles extends AbstractController
         if ( isset($param[0]) ) {
             $id = $param[0];
 
-            $role = new roleModel($id);
-            $role->delete();
+            $permission = new permissionModel($id);
+            $permission->delete();
         }
-        Redirect::to("roles");    
+        Redirect::to("permissions");    
     }
 }

@@ -11,9 +11,6 @@ class Validate
             if ( strpos( $validations, "|" ) === false ) {
                 echo "";
             }
-
-
         }
-
     }
 }

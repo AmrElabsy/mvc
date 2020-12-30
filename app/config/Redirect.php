@@ -17,12 +17,12 @@ class Redirect
     }
 
     public static function home() {
-        $path = BASE_URL;
+        $path = "";
         self::to($path);
     }
 
     public static function to($path) {
-        header("Location: " . $path);
+        header("Location: " . BASE_URL . $path);
         exit();
     }
 }

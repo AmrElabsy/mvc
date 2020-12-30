@@ -1,9 +1,8 @@
-<form action="<?= path("roles/edit"); ?>" method="POST">
-    <input type="hidden" name="id" value="<?= $role->getId(); ?>">
+<form action="<?= path("roles/add"); ?>" method="POST">
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Role Name: </label>
         <div class="col-sm-10">
-            <input class="form-control" name="name" type="text" value="<?= $role->getRole(); ?>" id="name">
+            <input class="form-control" name="name" type="text" id="name">
         </div>
     </div>
     <div class="form-group row">
@@ -12,7 +11,7 @@
             <div class="row">
                 <?php foreach( $permissions as $permission ): ?>
                     <div class="col-6 col-sm-4 col-md-3">
-                        <input type="checkbox" class="" id="permission<?= $permission->getId(); ?>" name="permissions[]" value="<?= $permission->getId(); ?>" <?= $role->hasPermission( $permission->getPermission() ) ? "checked" : "" ; ?> />
+                        <input type="checkbox" class="" id="permission<?= $permission->getId(); ?>" name="permissions[]" value="<?= $permission->getId(); ?>">
                         <label class="" for="permission<?= $permission->getId(); ?>"><?= $permission->getPermission(); ?></label>
                     </div>
                 <?php endforeach; ?>

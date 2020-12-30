@@ -30,6 +30,7 @@
 
             $permissions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            $this->permissions = [];
             foreach ($permissions as $permission) {
                 $per = new permissionModel($permission['id']);
                 $this->permissions[] = $per;
@@ -72,4 +73,69 @@
             return $tempRoles;
         }
 
+        public static function add( $name, array $permissions = [] ) {
+            global $con;
+            $con->beginTransaction();
+
+            try {
+                $stmt = $con->prepare("INSERT INTO " .  self::$tableName . "(role) VALUES(?)");
+                $stmt->execute( [$name] );
+
+                $id = $con->lastInsertId();
+
+                $role = new roleModel( $id);
+                $role->addPermissions( $permissions );
+            } catch ( Throwable $e ) {
+                $con->rollBack();
+                throw $e;
+            }
+            $con->commit();
+        }
+
+        public function update($name, array $permissions) {
+            $this->updateName($name);
+            $this->updatePermissions($permissions);
+        }
+
+        public function updateName( $name ) {
+            global $con;
+
+            $stmt = $con->prepare("UPDATE roles SET role = ? WHERE id = ?");
+            $stmt->execute([$name, $this->id]);
+        }
+
+        public function updatePermissions( array $permissions ) {
+            global $con;
+            $con->beginTransaction();
+            try {
+                $this->deletePermissions();
+                $this->addPermissions($permissions); 
+            } catch (Throwable $e) {
+                $con->rollBack();
+                throw $e;
+            }
+            $con->commit();
+
+        }
+
+        public function deletePermissions() {
+            global $con;
+            $stmt = $con->prepare("DELETE FROM role_permission WHERE role_id = ?");
+            $stmt->execute([$this->id]);
+        }
+
+        public function addPermissions( array $permissions ) {
+            global $con;
+            foreach( $permissions as $permission ) {
+                $stmt = $con->prepare("INSERT INTO role_permission(role_id, permission_id) VALUES(?, ?)");
+                $stmt->execute([$this->id, $permission]);
+            }
+        }
+
+        public function delete() {
+            global $con;
+
+            $stmt = $con->prepare("DELETE FROM " . self::$tableName . " WHERE id = ?");
+            $stmt->execute([$this->id]);
+        }
     }

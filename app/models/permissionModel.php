@@ -45,4 +45,25 @@
 
             return $tempPermissions;
         }
+
+        public static function add( $name ) {
+            global $con;
+
+            $stmt = $con->prepare("INSERT INTO " .  self::$tableName . "(permission) VALUES(?)");
+            $stmt->execute( [$name] );
+        }
+
+        public function update( $name ) {
+            global $con;
+
+            $stmt = $con->prepare("UPDATE " .  self::$tableName . " SET permission = ? WHERE id = ?");
+            $stmt->execute([$name, $this->id]);
+        }
+
+        public function delete() {
+            global $con;
+
+            $stmt = $con->prepare("DELETE FROM " . self::$tableName . " WHERE id = ?");
+            $stmt->execute([$this->id]);
+        }
     }
