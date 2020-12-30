@@ -30,3 +30,4 @@
     require_once "language.php";
     require_once "colormode.php";
     require_once "validate.php";
+    require_once "API.php";
