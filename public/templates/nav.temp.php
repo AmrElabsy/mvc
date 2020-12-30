@@ -469,6 +469,7 @@
 
                     </ul>
                 </div>
+
                 <!-- Sidebar -->
             </div>
         </div>
@@ -477,3 +478,4 @@
                 <div class="container-fluid">
 
         <?php endif; ?>
+
