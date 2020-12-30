@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <form action="<?= path("beauty/add"); ?>" method="POST">
+        <form action="<?= path("beauty/add"); ?>" method="POST" enctype="multipart/form-data">
             <input class="form-control" name="id" type="hidden" id="id">
 
             <div class="form-group row">
@@ -30,14 +30,12 @@
                 </div>
             </div>
 
-
-            <div class="mb-5">
-                                            <form action="#" class="dropzone">
-                                                <div class="fallback">
-                                                    <input name="file" type="file" multiple="multiple">
-                                                </div>
-                                            </form>
-                                        </div>
+            <div class="form-group row">
+            <label for="image" class="col-sm-2 col-form-label">Image: </label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="image" type="file" id="image">
+                </div>
+            </div>
 
             <div class="form-group row">
                 <div class="offset-md-2">

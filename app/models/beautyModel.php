@@ -1,6 +1,6 @@
 <?php
 
-    class permissionModel extends AbstractModel
+    class beautyModel extends AbstractModel
     {
         protected $id;
 

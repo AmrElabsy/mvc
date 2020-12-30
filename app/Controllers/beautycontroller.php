@@ -36,12 +36,13 @@ class beauty extends AbstractController
 
     public function add() {
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-            $id = Request::post("id");
-            $name = Request::post("name");
-            $phone = Request::post("phone");
-            $email = Request::post("email");
-            $paying = Request::post("paying");
-           
+            $name = Request::post('name');
+            $price = Request::post('price');
+            $currency = Request::post('currency');
+            $image = $_FILES['image'];
+            $image = base64_encode(file_get_contents( $image['tmp_name'] ));
+            
+
         } else {
             Asset::addCss("css/dropzone.min.css");
             Asset::addJs("js/dropzone.min.js");
