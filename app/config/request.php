@@ -40,4 +40,18 @@ class Request {
         return $output;
 
     }
+
+    public static function isPost() {
+        if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isGet() {
+        if ( $_SERVER['REQUEST_METHOD'] == "GET" ) {
+            return true;
+        }
+        return false;
+    }
 }

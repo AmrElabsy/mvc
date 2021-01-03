@@ -41,7 +41,20 @@ class beauty extends AbstractController
             $currency = Request::post('currency');
             $image = $_FILES['image'];
             $image = base64_encode(file_get_contents( $image['tmp_name'] ));
+
+            $data = [
+                "name" => $name,
+                "price" => $price,
+                "currency" => $currency,
+                "image" => $image 
+            ];
+            $api = new API();
+
+            $api->setData( $data );
+            $api->setUrl("http://localhost/mvc/home/index");
+            $api->setMethod("POST");
             
+            $api->execute();
 
         } else {
             Asset::addCss("css/dropzone.min.css");

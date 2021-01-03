@@ -15,15 +15,6 @@ class home extends AbstractController
 
             Asset::addJs("js/a/dashboard.init.js");
 
-
-            $user = new userModel(1);
-            $roles = $user->getRoles();
-            $this->data['doctors'] = doctorModel::getDoctorsByLimit(6);
-            $this->data['clinics'] = clinicModel::getClinicsByLimit(6);
-            $this->data['countOfClinics'] = clinicModel::getCount();
-            $this->data['countOFDoctors'] = doctorModel::getCount();
-            $this->data['countOfPatients'] = patientModel::getCount();
-
             $this->view();
         } else {
             Redirect::to("home/signin");
