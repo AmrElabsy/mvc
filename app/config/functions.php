@@ -23,71 +23,6 @@ function setActive($pageName)
     }
 }
 
-/** ****************** **/
-/** Language Functions **/
-/** ****************** **/
-
-/* Function to change the Language of the sentence. */
-/* The First Argument is the Arabic Word to return. */
-/* The Second Argument is the English one to return. */
-function getLang($arab, $eng)
-{
-    if (!isset($_SESSION['lang'])) {
-        return $arab;
-    } else {
-        if ($_SESSION['lang'] == "arabic") {
-            return $arab;
-        } else {
-            return $eng;
-        }
-    }
-}
-
-/* Function returns True or False */
-function isArabic()
-{
-    if (!isset($_SESSION['lang'])) {
-        return true;
-    } else {
-        if ($_SESSION['lang'] == 'arabic'){
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-
-/* Function returns True or False */
-function isEnglish()
-{
-    if (!isset($_SESSION['lang'])) {
-        return false;
-    } else {
-        if ($_SESSION['lang'] == 'english'){
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-
-function setArabic()
-{
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    $_SESSION['lang'] = 'arabic';
-}
-
-function setEnglish()
-{
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    $_SESSION['lang'] = 'english';
-}
-
-
 /** ************************** **/
 /** Password Hashing Functions **/
 /** *************************  **/
@@ -183,67 +118,10 @@ function uploadImage($folder, $number, $image)
 /** Functions of Server actions and authentication **/
 /** ********************************************** **/
 
-/* function to redirect to a specific path */
-/* if the argument is not set, then the function redirects to home page */
-/* Special cases: */
-/* 'self' ==> the same page */
-/* 'back' ==> the page that user comes from before that page */
-function redirect($path = '/mvc')
-{
-    if ($path == 'back') {
-        header('location: ' . $_SERVER['HTTP_REFERER']);
-    } elseif ($path == 'self'){
-        header('location: ' . $_SERVER['REQUEST_URI']);
-    } else {
-        header('location: /mvc/' . $path);
-    }
-    exit();
-}
-
 function path( $path = "" ) {
     return BASE_URL . $path;
 }
 
 function asset($file = "") {
     return STATIC_PATH . $file;
-}
-
-function isPatient()
-{
-    return isset($_SESSION['pat_id']);
-}
-
-function isDoctor()
-{
-    return isset($_SESSION['doc_id']);
-}
-
-function isAdmin()
-{
-    return isset($_SESSION['admin_id']);
-}
-
-function isReceptionist()
-{
-    return isset($_SESSION['rec_id']);
-}
-
-function getID()
-{
-    if (isPatient()) {
-        return $_SESSION['pat_id'];
-    }
-
-    if (isDoctor()) {
-        return $_SESSION['doc_id'];
-    }
-
-    if (isReceptionist()) {
-        return $_SESSION['rec_id'];
-    }
-}
-
-function isVisitor()
-{
-    return !(isDoctor() || isPatient() || isAdmin() || isReceptionist());
 }
