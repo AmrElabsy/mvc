@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-        <form action="<?= path("beauty/add"); ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= path("beauty/addservice"); ?>" method="POST" enctype="multipart/form-data">
             <input class="form-control" name="id" type="hidden" id="id">
 
             <div class="form-group row">

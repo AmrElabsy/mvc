@@ -230,7 +230,7 @@
                             </a>
                             <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="<?= path("beauty"); ?>">Index</a></li>
-                                <li><a href="<?= path("beauty/add"); ?>">Add</a></li>
+                                <li><a href="<?= path("beauty/addservice"); ?>">Add Service</a></li>
                             </ul>
                         </li>
 

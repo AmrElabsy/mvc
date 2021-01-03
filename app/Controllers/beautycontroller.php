@@ -5,13 +5,7 @@ include 'abstractcontroller.php';
 class beauty extends AbstractController
 {
     public function index() {
-        if ( Auth::is("Admin") ) {
-            $this->data['permissions'] = permissionModel::getAll();
-        
-            $this->view();
-        } else {
-            Redirect::to("home/signin");
-        }        
+        $this->view();
     }
 
     public function edit() {
@@ -34,13 +28,13 @@ class beauty extends AbstractController
         }
     }
 
-    public function add() {
+    public function addservice() {
         if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
             $name = Request::post('name');
             $price = Request::post('price');
             $currency = Request::post('currency');
-            $image = $_FILES['image'];
-            $image = base64_encode(file_get_contents( $image['tmp_name'] ));
+            $image = Request::files('image');
+            $image = base64_encode( file_get_contents( $image['tmp_name'] ) );
 
             $data = [
                 "name" => $name,
@@ -55,23 +49,11 @@ class beauty extends AbstractController
             $api->setMethod("POST");
             
             $api->execute();
-
         } else {
             Asset::addCss("css/dropzone.min.css");
             Asset::addJs("js/dropzone.min.js");
 
             $this->view();
         }
-    }
-
-    public function delete() {
-        global $param;
-        if ( isset($param[0]) ) {
-            $id = $param[0];
-
-            $permission = new permissionModel($id);
-            $permission->delete();
-        }
-        Redirect::to("permissions");    
     }
 }

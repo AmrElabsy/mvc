@@ -45,20 +45,20 @@ class API
         }
     }
 
-    public function getResult() {
-        return $this->result;
-    }
-
-    public function getBody() {
-        return $this->body;
-    }
-
     public function execute() {
         $response = API::send($this->url, $this->data, $this->method);
 
         $this->result = $response['result'];
         $this->body = $response;
         unset( $this->body['result'] );
+    }
+
+    public function getResult() {
+        return $this->result;
+    }
+
+    public function getBody() {
+        return $this->body;
     }
 
     public static function send(string $url, array $body, string $method)
@@ -73,6 +73,6 @@ class API
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         $result = curl_exec($ch);
-        return json_decode($result);
+        return $result;
     }
 }

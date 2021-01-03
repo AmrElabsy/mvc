@@ -15,6 +15,12 @@ class Request {
         return self::filter($var, $filterType);
     }
 
+    public static function files( $key, $type = null ) {
+        if ( $type == null ) {
+            return $_FILES[$key];
+        }
+    }
+
     private static function filter($var, $filterType) {
         switch ( $filterType ){
             case "string":

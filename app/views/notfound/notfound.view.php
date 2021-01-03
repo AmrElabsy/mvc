@@ -1,5 +1,23 @@
-<div class="container-fluid text-center">
-    <div class="h1 text-primary">Error 404</div>
-    <img class="img-center" src="public/images/public/saucer.png" alt="Not Found">
-    <div class="h3"><strong>Error 404: </strong>This page couldn't be found</div>
-</div>
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-6 offset-md-3 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="ex-page-content text-center">
+                                <h1 class="">404!</h1>
+                                <h3 class="">Sorry, page not found</h3><br>
+                                <a class="btn btn-primary mb-5 waves-effect waves-light" href="index.html">Back to Dashboard</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div> <!-- container-fluid -->
+    </div>
